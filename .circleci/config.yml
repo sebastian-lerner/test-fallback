@@ -47,12 +47,15 @@ jobs:
             command: |
               mkdir test-results
               "echo replace this echo command with your test command" 
-        - store_test_results:
-            path: test-results 
-  
+      
+      # Use https://circleci.com/docs/collect-test-data/ to upload test results to CircleCI to easily visualize test feailures
+      #  - store_test_results:
+      #      path: test-results 
+
+#Deploy job 
  # deploy:
  #     docker:
- #       - image: cimg/base:stable
+ #       - image: cimg/deploy:2023.05
  #     steps:
  #       - checkout
  #       - run:
