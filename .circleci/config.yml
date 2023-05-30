@@ -44,7 +44,11 @@ jobs:
         - checkout
         - run:
             name: "run tests"
-            command: "echo replace this echo command with your test command" #insert test command here (ie. yarn test)
+            command: |
+              mkdir test-results
+              "echo replace this echo command with your test command" 
+        - store_test_results:
+            path: test-results 
   
  # deploy:
  #     docker:
