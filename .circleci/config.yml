@@ -2,28 +2,57 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-# Define a "job": collection of steps that are executed as a single unit in an execution environment
-# See: https://circleci.com/docs/configuration-reference/#jobs
-
-# Orchestrate jobs using workflows
+# Express a "workflow": a collection of CI "jobs" ("build", "test", "deploy", etc.) which are run in a specified order. 
+# This workflow executes a build job, a job that runs tests, and a deploy job sequentially.  The deploy job is commented out to avoid a bad deployment.
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
+      - build
+      - run-tests:
+          requires:
+            - build
+#      - deploy:
+#          requires:
+#            - run-tests 
 
+# "build" job template: (job is a collection of steps that are executed as a single unit in an execution environment)
+# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+  build:
+    # Specify the execution environment. 
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+
+    # Add steps to the job.  Steps are ...
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "build"
+          command: "echo replace this echo with the command to build your application"
+  
+  #Job where tests are run
+  run-tests:
+      # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+      # See: https://circleci.com/docs/configuration-reference/#executor-job
+      docker:
+        - image: cimg/base:stable
+      # Add steps to the job
+      # See: https://circleci.com/docs/configuration-reference/#steps
+      steps:
+        - checkout
+        - run:
+            name: "run tests"
+            command: "echo replace this echo command with your test command" #insert test command here (ie. yarn test)
+  
+ # deploy:
+ #     docker:
+ #       - image: cimg/base:stable
+ #     steps:
+ #       - checkout
+ #       - run:
+ #           name: "deploy"
+ #           command: "echo replace this echo command with your deploy command"
 
 
