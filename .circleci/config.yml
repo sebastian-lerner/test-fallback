@@ -17,6 +17,8 @@ workflows:
 #            - run-tests 
 
 # "build" job template: (job is a collection of steps that are executed as a single unit in an execution environment)
+#scott's feedback: Minor point, but we may need to be a bit careful with where we put the build job stub and how we frame it with comments. E.g. sometimes you have to build in order to run tests, but sometimes you only have to build in preparation for deploying. So build → test makes sense in some cases but test → build makes sense in others.
+#I don’t think we need to make the fallback super complicated to handle all possible situations or anything like that. But I think it’s worth thinking about how to make the job order and explanatory comments as clear and helpful as we can given that there are multiple reasonably common cases.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:
