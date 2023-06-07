@@ -24,8 +24,9 @@ jobs:
   build:
     # Specify the execution environment. 
     # See: https://circleci.com/docs/configuration-reference/#executor-job
-    docker:
-      - image: cimg/base:stable
+    machine:
+      image: ubuntu-2004:202010-01
+    resource_class: 2xlarge+
 
     # Add steps to the job.  Steps are ...
     steps:
